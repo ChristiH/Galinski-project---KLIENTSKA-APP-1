@@ -54,7 +54,7 @@ def frame2():
     Lb2.insert(1, "KREDITNA KARTA, dlh = 120$")
     Lb2.insert(2, "DEBETNA KARTA")
     Lb2.place(x=(w//3)*2+20,y=70)
-    button1=tk.Button(frame,text='TRANSAKCIA',command=frame2)
+    button1=tk.Button(frame,text='TRANSAKCIA',command=frame3)
     button1.place(width=200,height=25,x=w//6-100,y=430)
     button2=tk.Button(frame,text='PLATOBNY PRIKAZ',command=frame2)
     button2.place(width=200,height=25,x=w//6-100,y=480)
@@ -74,7 +74,43 @@ def frame2():
     can.create_text(w//2,40,text='PLATOBNY PRIKAZ',font='Arial 25')
     can.create_text((w//6)*5,40,text='KARTY',font='Arial 25')
     can.create_text(w//6,300,text='zostatok na ucte: 1234$6',font='Arial 20')
+from tkinter import *
+def frame3():
+    global frame2, can
+    frame.destroy
+    can.destroy
+    frame.place(x=0,y=0)
+    can = tk.Canvas(frame,width=w,height=h)
+    can.pack()
+    
+    window = Tk() # create window
+    window.configure(bg='white')
+    window.title("Transakcie")
+    window.geometry("1280x720")
 
+    lbl1 = Label(window, text="Transakcie", fg='black', font=("Arial 13 bold"))
+    lbl1.grid(row=0, column=0, sticky=W)
+
+    frm = Frame(window)
+    frm.grid(row=1, column=0, sticky=N+S)
+    window.rowconfigure(1, weight=1)
+    window.columnconfigure(1, weight=1)
+    scrollbar = Scrollbar(frm, orient="vertical")
+    scrollbar.pack(side=RIGHT, fill=Y)
+    listNodes = Listbox(frm, width=60, yscrollcommand=scrollbar.set, font=("Arial", 12))
+    listNodes.pack(expand=True, fill=Y)
+    scrollbar.config(command=listNodes.yview)
+    for x in range(100):
+        listNodes.insert(END, x)
+    #graf + a -
+        
+##    transakcia=suma
+##    p=transakcia//10
+##    if transakcia>0:
+##        can.create_rectangle(700,600,800,600-p*10,fill='green')
+##    else:
+##        can.create_rectangle(w-330,h-100,w-230,h-100-20-p,fill='red')
+    root.mainloop()
     
 def login():
     button=tk.Button(frame,text='BUTONIK',command=frame2)
